@@ -15,6 +15,8 @@ use App\Http\Controllers\UserController;
 
 Route::get('/', [\App\Http\Controllers\AuthController::class, 'showLoginForm']);
 
+Route::get('/registro', [\App\Http\Controllers\AuthController::class, 'showRegisterForm'])->name('register');
+
 Route::get('/login', function () {
     return view('login');
 });
