@@ -15,10 +15,13 @@ use App\Http\Controllers\UserController;
 
 Route::get('/', [\App\Http\Controllers\AuthController::class, 'showLoginForm']);
 
-Route::get('/registro', [\App\Http\Controllers\AuthController::class, 'showRegisterForm'])->name('register');
+Route::get('/register', [\App\Http\Controllers\AuthController::class, 'showRegisterForm'])->name('register_view');
 
 Route::get('/login', function () {
     return view('login');
 });
 
 Route::post('/buscar_usuario', [\App\Http\Controllers\AuthController::class, 'login']);
+
+Route::post('/auth/register', [\App\Http\Controllers\AuthController::class, 'registerUser'])->name('register');
+
