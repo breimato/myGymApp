@@ -23,5 +23,5 @@ Route::get('/login', function () {
 
 Route::post('/buscar_usuario', [\App\Http\Controllers\AuthController::class, 'login']);
 
-Route::post('/auth/register', [\App\Http\Controllers\AuthController::class, 'registerUser'])->name('register');
+Route::post('/auth/register', [\App\Http\Controllers\AuthController::class, 'registerUser']);
 

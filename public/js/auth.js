@@ -88,7 +88,7 @@ $(document).ready(function () {
                 type: "POST",
                 url: "/auth/register",
                 data: {
-                    username: username.val(),
+                    name: username.val(),
                     email: email.val(),
                     password: password.val(),
                     birthdate: birthdate.val(),
@@ -97,13 +97,27 @@ $(document).ready(function () {
                     _token: $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function (response) {
-                    if (response.success) return Swal.fire('Éxito', 'Registro completado con éxito.', 'success');
-
-                    Swal.fire('Error', 'Hubo un problema al registrar. Por favor, inténtalo de nuevo.', 'error');
+                    if (response.success){
+                        Swal.fire('Éxito', response.message, 'success').then(() => {
+                            $(location).attr('href', '/');
+                        });
+                    }
 
                 },
-                error: function () {
-                    Swal.fire('Error', 'Error al comunicarse con el servidor. Por favor, inténtalo de nuevo.', 'error');
+                error: function (error) {
+                    if (error.status === 422) {
+                        const errors = error.responseJSON.errors;
+
+                        for (const key in errors) {
+                            if (errors.hasOwnProperty(key)) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: errors[key][0],
+                                });
+                            }
+                        }
+                    }
                 }
             });
         }
