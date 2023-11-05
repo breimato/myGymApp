@@ -22,16 +22,23 @@ class AuthController extends Controller
     }
 
     public function login(Request $request){
+        $SUCCESS_MSG = "Usuario loggeado con éxito.";
+
         $name = $request->input('name');
-        $pass = $request->input('password');
+        $pass = bcrypt($request->input('password'));
 
         $user = $this->authService->authenticate($name, $pass);
 
-        if (!$user) return "Problema al iniciar sesion";
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'errors' => [["¡Nombre y/o contraseña incorrectos!"]]
+            ], 422);
+        }
 
         Auth::login($user);
 
-        return redirect('/dashboard');
+        return response()->json(['success' => true, 'message' => $SUCCESS_MSG, 'operation' => 'login']);
     }
 
     public function showLoginForm()
@@ -59,7 +66,7 @@ class AuthController extends Controller
 
         User::create($data);
 
-        return response()->json(['success' => true, 'message' => $SUCCESS_MSG]);
+        return response()->json(['success' => true, 'message' => $SUCCESS_MSG, 'operation' => 'register']);
     }
 
     private function getValidationMessages()

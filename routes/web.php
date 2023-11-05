@@ -21,7 +21,7 @@ Route::get('/login', function () {
     return view('login');
 });
 
-Route::post('/buscar_usuario', [\App\Http\Controllers\AuthController::class, 'login']);
+Route::post('/auth/login', [\App\Http\Controllers\AuthController::class, 'login']);
 
 Route::post('/auth/register', [\App\Http\Controllers\AuthController::class, 'registerUser']);
 
