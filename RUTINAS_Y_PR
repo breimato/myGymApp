@@ -1,0 +1,38 @@
+Entiendo perfectamente tus requerimientos. Vamos a estructurar la implementación en dos partes:
+
+1. **Gestión de Rutinas de Entrenamiento:**
+   - Crearás rutinas que incluyen ejercicios, pero las series, repeticiones y pesos serán variables y registradas por los usuarios mientras realizan la rutina.
+   - Necesitarás una vista adicional donde los usuarios puedan registrar cómo les fue en cada ejercicio de la rutina (peso, series y repeticiones).
+
+2. **Modificación en la Tabla de Registros de Pesos (`weight_records`):**
+   - Quieres añadir un atributo para las repeticiones en los registros de pesos, ya que un récord personal (PR) puede ser a una o varias repeticiones.
+
+### Implementación:
+
+#### 1. Gestión de Rutinas de Entrenamiento:
+
+- **Modelo de Datos:**
+  - Tendrás un modelo `Routine` que incluye varios `Exercises`.
+  - Necesitarás un modelo adicional, por ejemplo, `RoutineExecution` o `RoutineLog`, para registrar las ejecuciones de las rutinas por parte de los usuarios. Este modelo incluirá detalles como el ejercicio, el peso levantado, las repeticiones realizadas y las series.
+
+- **Vista de Ejecución de Rutina:**
+  - Crearás una vista donde los usuarios seleccionan una rutina y luego registran su rendimiento en cada ejercicio. Esta vista puede incluir formularios para ingresar series, repeticiones y peso para cada ejercicio.
+
+#### 2. Modificación de la Tabla `weight_records`:
+
+- **Actualización del Modelo y la Base de Datos:**
+  - Añadirás un nuevo campo `repetitions` en la tabla `weight_records`.
+  - Actualizarás el modelo correspondiente en tu aplicación para reflejar este cambio, asegurándote de que puedas registrar y acceder a la información sobre las repeticiones para los registros de peso.
+
+### Consideraciones Adicionales:
+
+- **Diseño de Interfaz de Usuario:**
+  - La interfaz de usuario para la ejecución de rutinas debe ser intuitiva y fácil de usar, permitiendo a los usuarios ingresar rápidamente los datos mientras entrenan.
+
+- **Validación de Datos:**
+  - Implementar validaciones tanto en el frontend como en el backend para asegurar la precisión de los datos ingresados por los usuarios.
+
+- **Pruebas y Feedback:**
+  - Es importante probar estas nuevas funcionalidades y obtener feedback de los usuarios para realizar ajustes necesarios.
+
+Con estas implementaciones, podrás ofrecer a los usuarios una manera efectiva de planificar sus rutinas de entrenamiento y registrar su rendimiento, así como también mantener un seguimiento más detallado de sus registros de peso incluyendo las repeticiones.

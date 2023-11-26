@@ -46,4 +46,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function progressRecords()
+    {
+        return $this->hasMany(ProgressRecord::class);
+    }
+
+    public function routines()
+    {
+        return $this->hasMany(Routine::class);
+    }
+
+    public function weightRecords()
+    {
+        return $this->hasMany(WeightRecord::class);
+    }
+
 }

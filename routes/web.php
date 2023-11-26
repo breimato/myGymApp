@@ -15,6 +15,13 @@ use App\Http\Controllers\UserController;
 
 Route::get('/', [\App\Http\Controllers\AuthController::class, 'showLoginForm']);
 
+Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'showDashboard']);
+
+Route::get('/routines', [\App\Http\Controllers\RoutinesController::class, 'showRoutines']);
+
+Route::get('/add_routine', [\App\Http\Controllers\RoutinesController::class, 'showAddRoutines']);
+
+
 Route::get('/register', [\App\Http\Controllers\AuthController::class, 'showRegisterForm'])->name('register_view');
 
 Route::get('/login', function () {
