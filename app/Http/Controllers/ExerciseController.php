@@ -43,4 +43,26 @@ class ExerciseController extends Controller
 
         return response()->json();
     }
+
+    public function getExercisesByType(Request $request)
+    {
+        $exerciseNumber = $request->input('routineSelect');
+
+        $numberToType = [
+            "1" => 'Pecho',
+            "2" => 'Espalda',
+            "3" => 'Piernas',
+            "4" => 'Hombros',
+            "5" => 'Brazos',
+            "6" => 'Abdomen',
+            "7" => 'Empujes',
+            "8" => 'Jalones'
+        ];
+
+        $type = $numberToType[$exerciseNumber];
+
+        $exercises = Exercise::where('type', $type)->get();
+
+        return response()->json($exercises);
+    }
 }

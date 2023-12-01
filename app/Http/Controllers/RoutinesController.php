@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 class RoutinesController extends Controller
 {
     public function showRoutines()
@@ -14,8 +16,17 @@ class RoutinesController extends Controller
     {
         return view('add_routines');
     }
-    public function newRoutine()
+    public function addRoutine(Request $request)
     {
+        $SUCCESS_MSG = "¡Rutina creada con éxito!";
+
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'type' => 'required',
+            'exercises' => 'required'
+        ]);
+
 
     }
 }

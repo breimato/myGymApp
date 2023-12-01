@@ -11,8 +11,8 @@
             <!-- Fila para el nombre y descripción de la rutina -->
             <div class="row mb-3">
                 <div class="col">
-                    <select class="form-control">
-                        <option selected>-- Elegir Tipo de Rutina --</option>
+                    <select class="form-control" id="routineSelect">
+                        <option value="0" selected>-- Elegir Tipo de Rutina --</option>
                         <!-- Opciones de tipos de rutina aquí -->
                         <option value="1">Rutina de Pecho</option>
                         <option value="2">Rutina de Espalda</option>
@@ -25,10 +25,10 @@
                     </select>
                 </div>
                 <div class="col">
-                    <input type="text" class="form-control" placeholder="Nombre de la Rutina">
+                    <input type="text" class="form-control" id="routineName" placeholder="Nombre de la Rutina">
                 </div>
                 <div class="col">
-                    <input type="text" class="form-control" placeholder="Descripción">
+                    <input type="text" class="form-control" id="routineDescription" placeholder="Descripción">
                 </div>
             </div>
 
@@ -39,8 +39,8 @@
                     <h4>1</h4>
                 </div>
                 <div class="col">
-                    <select class="form-control">
-                        <option selected>-- Elegir Ejercicio --</option>
+                    <select class="form-control exercise-select" id="exerciseSelect">
+                        <option value="0" selected>-- Elegir Ejercicio --</option>
                         <!-- Opciones de ejercicios aquí -->
                     </select>
                 </div>
@@ -57,7 +57,7 @@
             <!-- Botón para enviar el formulario -->
             <div class="row">
                 <div class="col">
-                    <button type="submit" class="btn btn-primary btn-block">Crear Rutina</button>
+                    <button type="submit" id="createRoutine" class="btn btn-primary btn-block">Crear Rutina</button>
                 </div>
             </div>
 

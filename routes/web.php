@@ -30,5 +30,10 @@ Route::get('/login', function () {
 
 Route::post('/auth/login', [\App\Http\Controllers\AuthController::class, 'login']);
 
+Route::post('/addRoutine', [\App\Http\Controllers\RoutinesController::class, 'addRoutine']);
+
+Route::post('/getExercises', [\App\Http\Controllers\ExerciseController::class, 'getExercisesByType']);
+
+
 Route::post('/auth/register', [\App\Http\Controllers\AuthController::class, 'registerUser']);
 

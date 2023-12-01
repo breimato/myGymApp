@@ -21,6 +21,7 @@ class AuthController extends Controller
         $this->authService = $authService;
     }
 
+
     public function login(Request $request){
         $SUCCESS_MSG = "Usuario loggeado con éxito.";
 
