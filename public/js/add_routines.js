@@ -44,14 +44,21 @@ $(document).ready(function () {
             $.ajax({
                 url: URL_ROUTINE,
                 method: 'POST',
-                data: {
-                    exercises: exercises, _token: $('meta[name="csrf-token"]').attr('content')},
+                data:
+                {
+                    exercises: exercises,
+                    routineName: routineName.val(),
+                    routineDescription: routineDescription.val(),
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                },
                 success: function (data) {
-                    Swal.fire({
+                    Swal.fire
+                    ({
                         icon: 'success',
                         title: 'Éxito',
                         text: data.message,
-                    }).then(() => {
+                    }).then(() =>
+                    {
                         window.location.href = '/routines';
                     });
                 },

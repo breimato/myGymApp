@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Routine;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RoutinesController extends Controller
 {
@@ -20,13 +22,21 @@ class RoutinesController extends Controller
     {
         $SUCCESS_MSG = "¡Rutina creada con éxito!";
 
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'type' => 'required',
-            'exercises' => 'required'
+        $user = Auth::id();
+
+//        $exercises = $request->input('exercises');
+
+        $routineName = $request->input('routineName');
+        $routineDescription = $request->input('routineDescription');
+
+
+
+        Routine::create([
+            'name' => $routineName,
+            'description' => $routineDescription,
+            'user_id' => $user
         ]);
 
-
+        return response()->json(['success' => true, 'message' => $SUCCESS_MSG, 'operation' => 'add_routine']);
     }
 }
