@@ -17,7 +17,7 @@ class Routine extends Model
 
     public function exercises(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Exercise::class, 'routine_exercise', 'routine_id', 'exercise_id');
+        return $this->belongsToMany(Exercise::class, 'routine_exercises', 'routine_id', 'exercise_id');
     }
 
     public function getExercises()

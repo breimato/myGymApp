@@ -1,3 +1,5 @@
+
+
 $(document).ready(function () {
     let cont = 1;
     let routineSelect = $('#routineSelect');
@@ -8,12 +10,13 @@ $(document).ready(function () {
     let routineDescription = $('#routineDescription');
     const URL_EXERCISES = "/getExercises";
     const URL_ROUTINE = "/addRoutine";
+
     routineSelect.change(function () {
         let selectedRoutineType = routineSelect.val();
 
         // Actualizar todos los selects de ejercicios existentes cuando se cambia el tipo de rutina
 
-        $('.exercise-select').each(function() {
+        $('.exercise-select').each(function () {
             handleAjaxRequest(selectedRoutineType, $(this), URL_EXERCISES);
         });
     });
@@ -45,25 +48,41 @@ $(document).ready(function () {
                 url: URL_ROUTINE,
                 method: 'POST',
                 data:
-                {
-                    exercises: exercises,
-                    routineName: routineName.val(),
-                    routineDescription: routineDescription.val(),
-                    _token: $('meta[name="csrf-token"]').attr('content')
-                },
+                    {
+                        exercises: exercises,
+                        routineName: routineName.val(),
+                        routineDescription: routineDescription.val(),
+                        _token: $('meta[name="csrf-token"]').attr('content')
+                    },
                 success: function (data) {
                     Swal.fire
                     ({
                         icon: 'success',
                         title: 'Éxito',
                         text: data.message,
-                    }).then(() =>
-                    {
+                    }).then(() => {
                         window.location.href = '/routines';
                     });
                 },
-                error: function (err) {
-                    console.log(err);
+                error: function (error) {
+                    if (error.status !== 422) {
+                        return Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'Ocurrió un error inesperado.',
+                        });
+                    }
+                    const errors = error.responseJSON.errors;
+                    for (const key in errors) {
+                        if (errors.hasOwnProperty(key)) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: errors[key][0],
+                            });
+                        }
+                    }
+
                 }
             });
         }
@@ -72,6 +91,7 @@ $(document).ready(function () {
     function isEmpty(input) {
         return $.trim(input) === '';
     }
+
     function handleAjaxRequest(routineValue, exerciseSelectElement, URL) {
         $.ajax({
             url: URL,
@@ -131,5 +151,17 @@ $(document).ready(function () {
         ];
     }
 
+    function getRoutineCreationRules() {
+        return [
+            {
+                check: () => !isEmpty(routineName.val()),
+                message: 'El nombre de la rutina no puede estar vacío.',
+            },
+            {
+                check: () => !isEmpty(routineDescription.val()),
+                message: 'La descripcion de la rutina no puede estar vacía.',
+            }
+        ];
+    }
 
 });

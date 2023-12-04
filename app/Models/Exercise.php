@@ -12,7 +12,12 @@ class Exercise extends Model
 
     public function routines(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Routine::class, 'routine_exercise', 'exercise_id', 'routine_id');
+        return $this->belongsToMany(Routine::class, 'routine_exercises', 'exercise_id', 'routine_id');
+    }
+
+    public function routinesExercises(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(RoutineExercise::class);
     }
 
 }

@@ -59,7 +59,7 @@ class AuthController extends Controller
         $data['password'] = trim($data['password']);
         $data['password']  = bcrypt($data['password']);
 
-        $validator = Validator::make($data, $this->getValidationRules(), $this->getValidationMessages());
+        $validator = Validator::make($data, $this->getAuthValidationRules(), $this->getAuthValidationMessages());
 
         if ($validator->fails()) return response()->json(['errors' => $validator->errors()], 422);
 
@@ -70,7 +70,7 @@ class AuthController extends Controller
         return response()->json(['success' => true, 'message' => $SUCCESS_MSG, 'operation' => 'register']);
     }
 
-    private function getValidationMessages()
+    private function getAuthValidationMessages()
     {
         return [
             // Para el name
@@ -107,7 +107,7 @@ class AuthController extends Controller
         ];
     }
 
-    private function getValidationRules()
+    private function getAuthValidationRules()
     {
         return [
             'name' => 'required|string|max:255|unique:users,name',
