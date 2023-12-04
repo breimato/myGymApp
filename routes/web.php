@@ -37,3 +37,4 @@ Route::post('/getExercises', [\App\Http\Controllers\ExerciseController::class, '
 
 Route::post('/auth/register', [\App\Http\Controllers\AuthController::class, 'registerUser']);
 
+Route::delete('/routines/{id}', [\App\Http\Controllers\RoutinesController::class, 'deleteRoutine'])->name('routines.delete');

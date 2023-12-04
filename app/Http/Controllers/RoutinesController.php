@@ -16,7 +16,12 @@ class RoutinesController extends Controller
         return view('routines', ['routines' => $routines]);
     }
 
-
+    public function deleteRoutine($id)
+    {
+        $routine = Routine::findOrFail($id);
+        $routine->delete();
+        return redirect()->back()->with('success', 'Rutina eliminada con éxito');
+    }
     public function showAddRoutines()
     {
         return view('add_routines');
@@ -54,8 +59,6 @@ class RoutinesController extends Controller
 
         return response()->json(['success' => true, 'message' => $SUCCESS_MSG, 'operation' => 'add_routine']);
     }
-
-
     private function getRoutinesValidationMessages()
     {
         return [
@@ -71,7 +74,6 @@ class RoutinesController extends Controller
             'user_id.integer' => 'El id debe ser un número entero.',
         ];
     }
-
     private function getRoutinesValidationRules()
     {
         return [

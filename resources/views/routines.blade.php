@@ -1,23 +1,24 @@
-@extends('layout');
+@extends('layout')
 
-@section('title', 'Rutinas - GymApp');
+@section('title', 'Rutinas - GymApp')
 
-@section('content');
+@section('content')
 
 
 <div class="container">
-    <h2>Rutinas de Entrenamiento</h2>
+
+    <h2 style="padding: 20px">Rutinas de Entrenamiento</h2>
 
     <!-- Botón para agregar nueva rutina -->
-    <a href="/add_routine" class="btn btn-primary mb-3">Agregar Nueva Rutina</a>
+    <a href="/add_routine" class="btn btn-success mb-3">Agregar Nueva Rutina</a>
 
     <!-- Tabla para mostrar las rutinas -->
     <table class="table table-striped">
         <thead>
         <tr>
             <th>Rutina</th>
-            <th>Nombre del Ejercicio</th>
-            <th>Ejercicio</th>
+            <th>Nombre de la Rutina</th>
+            <th>Ejercicios</th>
             <th>Acciones</th>
         </tr>
         </thead>
@@ -28,15 +29,15 @@
                 <td>{{ $routine->description }}</td>
                 <td>
                     @foreach ($routine->exercises as $exercise)
-                        <p>{{ $exercise->name }}</p>
+                        <p>{{ $loop->iteration }}. {{ $exercise->name }}</p>
                     @endforeach
                 </td>
                 <td>
                     <a href="#" class="btn btn-secondary">Editar</a>
-                    <form action="#" method="POST" style="display:inline-block;">
+                    <form action="{{ route('routines.delete', $routine->id) }}" method="POST" style="display:inline-block;">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                        <button type="submit" class="btn btn-danger delete-button">Eliminar</button>
                     </form>
                 </td>
             </tr>
@@ -45,6 +46,7 @@
     </table>
 </div>
 
+<script src="{{ asset('js/utils.js') }}"></script>
 
 
-@endsection;
+@endsection
