@@ -17,18 +17,20 @@
         <tr>
             <th>Rutina</th>
             <th>Nombre del Ejercicio</th>
-            <th>Series</th>
-            <th>Repeticiones</th>
+            <th>Ejercicio</th>
             <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
-{{--        @foreach ($rutinas as $rutina)--}}
+        @foreach ($routines as $routine)
             <tr>
-{{--                <td>{{ $rutina->id }}</td>--}}
-{{--                <td>{{ $rutina->nombre_ejercicio }}</td>--}}
-{{--                <td>{{ $rutina->series }}</td>--}}
-{{--                <td>{{ $rutina->repeticiones }}</td>--}}
+                <td>{{ $routine->name }}</td>
+                <td>{{ $routine->description }}</td>
+                <td>
+                    @foreach ($routine->exercises as $exercise)
+                        <p>{{ $exercise->name }}</p>
+                    @endforeach
+                </td>
                 <td>
                     <a href="#" class="btn btn-secondary">Editar</a>
                     <form action="#" method="POST" style="display:inline-block;">
@@ -38,7 +40,7 @@
                     </form>
                 </td>
             </tr>
-{{--        @endforeach--}}
+        @endforeach
         </tbody>
     </table>
 </div>

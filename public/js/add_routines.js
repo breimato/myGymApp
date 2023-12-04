@@ -88,10 +88,6 @@ $(document).ready(function () {
         }
     });
 
-    function isEmpty(input) {
-        return $.trim(input) === '';
-    }
-
     function handleAjaxRequest(routineValue, exerciseSelectElement, URL) {
         $.ajax({
             url: URL,
@@ -108,16 +104,6 @@ $(document).ready(function () {
                 console.log(err);
             }
         });
-    }
-
-    function validateFields(rules) {
-        for (const rule of rules) {
-            if (!rule.check()) {
-                Swal.fire('Error', rule.message, 'error');
-                return false;
-            }
-        }
-        return true;
     }
 
     function getRoutineRules() {
@@ -147,19 +133,6 @@ $(document).ready(function () {
                     return isValid;
                 },
                 message: 'Debes seleccionar un ejercicio para cada ejercicio agregado.'
-            }
-        ];
-    }
-
-    function getRoutineCreationRules() {
-        return [
-            {
-                check: () => !isEmpty(routineName.val()),
-                message: 'El nombre de la rutina no puede estar vacío.',
-            },
-            {
-                check: () => !isEmpty(routineDescription.val()),
-                message: 'La descripcion de la rutina no puede estar vacía.',
             }
         ];
     }

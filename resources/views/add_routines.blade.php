@@ -65,5 +65,6 @@
         </form>
     </div>
 
+    <script src="{{ asset('js/utils.js') }}"></script>
     <script src="{{ asset('js/add_routines.js') }}"></script>
 @endsection

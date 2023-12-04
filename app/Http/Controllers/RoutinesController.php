@@ -12,7 +12,8 @@ class RoutinesController extends Controller
 {
     public function showRoutines()
     {
-        return view('routines');
+        $routines = Routine::with('exercises')->where('user_id', Auth::id())->get();
+        return view('routines', ['routines' => $routines]);
     }
 
 
@@ -49,10 +50,11 @@ class RoutinesController extends Controller
             $cont++;
         }
 
-        DB::table('routine_exercises')->insert($attachData);
+        DB::table('routine_exercises')->insertOrIgnore($attachData);
 
         return response()->json(['success' => true, 'message' => $SUCCESS_MSG, 'operation' => 'add_routine']);
     }
+
 
     private function getRoutinesValidationMessages()
     {
@@ -78,6 +80,7 @@ class RoutinesController extends Controller
             'user_id' => 'required|integer',
         ];
     }
+
 
 
 }
